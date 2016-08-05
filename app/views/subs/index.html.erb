@@ -1,0 +1,9 @@
+<h1> Welcome Reddit Clone!</h1>
+
+<h3> Here are our subs:</h3>
+
+<ul>
+  <% @subs.each do |sub| %>
+  <li> <%= link_to sub.title, sub_url(sub.id) %></li>
+  <% end %>
+</ul>

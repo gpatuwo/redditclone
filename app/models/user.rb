@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_many :subs, primary_key: :id, foreign_key: :moderator_id, class_name: :Sub
+
   validates :username, :session_token, :password_digest, presence: true
   validates :username, uniqueness: true
   validates :password, length: {minimum: 8, allow_nil: true}
