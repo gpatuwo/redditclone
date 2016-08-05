@@ -5,5 +5,5 @@
 </p>
 
 <p>
-  This page's moderator is <%= @sub.moderator.username %>.
+  This page's moderator is <%= link_to @sub.moderator.username, user_url(@sub.moderator.id) %>.
 </p>

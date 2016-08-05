@@ -1,9 +1,9 @@
-<h1> Welcome Reddit Clone!</h1>
-
-<h3> Here are our subs:</h3>
+<h2> Here are our subs:</h2>
 
 <ul>
   <% @subs.each do |sub| %>
   <li> <%= link_to sub.title, sub_url(sub.id) %></li>
   <% end %>
 </ul>
+
+<%= button_to "Create a sub", new_sub_url, method: :get, form_class: :subs%>

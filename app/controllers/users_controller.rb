@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       login!(@user)
-      redirect_to user_url(@user.id)
+      redirect_to subs_url
       #redirect to comments/or articles pages
     else
       flash.now[:errors] = "Invalid credentials"
