@@ -7,3 +7,5 @@
 <p>
   This page's moderator is <%= link_to @sub.moderator.username, user_url(@sub.moderator.id) %>.
 </p>
+
+<%= button_to "Back to Subs Index", subs_url, method: :get, form_class: :subs%>
