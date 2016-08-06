@@ -36,7 +36,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.new(post_params)
-    @post.moderator = current_user
+    @post.author = current_user
     if @post.save
       redirect_to post_url(@post.id)
     else
