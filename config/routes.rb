@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resource :session
 
-  resources :subs 
+  resources :subs
 
+  resources :posts, except: [:index]
 end

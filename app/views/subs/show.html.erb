@@ -1,4 +1,4 @@
-<h1> <%= @sub.title  %></h1>
+<h1> <%= @sub.title  %> Sub Page</h1>
 
 <p>
   <%= @sub.description %>
@@ -8,4 +8,10 @@
   This page's moderator is <%= link_to @sub.moderator.username, user_url(@sub.moderator.id) %>.
 </p>
 
+<h3>Posts:</h3>
+<ul>
+  <% @sub.posts.each do |post| %>
+    <li> <%= link_to post.title, post_url(post.id) %></li>
+  <% end %>
+</ul>
 <%= button_to "Back to Subs Index", subs_url, method: :get, form_class: :subs%>

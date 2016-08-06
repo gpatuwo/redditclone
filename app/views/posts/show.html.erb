@@ -1,0 +1,10 @@
+<h3><%= @post.sub.title %></h3>
+
+<h4><%= link_to @post.title, @post.url %>
+  <br> submitted by <%= @post.author.username %></h4>
+
+<p>
+  <%= @post.content %>
+</p>
+
+<%= button_to "Back to Sub", sub_url(@post.sub_id), method: :get, form_class: :subs %>

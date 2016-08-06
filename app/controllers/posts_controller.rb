@@ -8,13 +8,8 @@ class PostsController < ApplicationController
       render :show
     else
       flash.now[:errors] = "Post not found"
-      redirect :index
+      redirect_to subs_url
     end
-  end
-
-  def index
-    @posts = Post.all
-    render :index
   end
 
   def new
