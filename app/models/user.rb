@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   has_many :subs, primary_key: :id, foreign_key: :moderator_id, class_name: :Sub
+  has_many :posts
 
   validates :username, :session_token, :password_digest, presence: true
   validates :username, uniqueness: true

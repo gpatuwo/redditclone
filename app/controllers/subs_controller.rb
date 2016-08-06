@@ -1,17 +1,17 @@
 class SubsController < ApplicationController
 
-  before_action :is_current_user_moderator?, only: [:edit, :update]
+  before_action :is_current_user_moderator?, only: [:edit, :update], message: "You are not authorized to edit this sub"
 
   def show
-    @sub = Sub.find(params[:id])
+    @sub = Sub.find_by_id(params[:id])
     # find searches by primary key. find_by searches by whatever key you specify
-    # find is prefered bc primary key is always index
+    # find is prefered bc primary key is always index BUUUT it will throw an ActiveRecord error and EXIT OUT of the method if it's false
     # find_by is an O(n) search
     if @sub
       render :show
     else
-      flash.now[:errors] = "Sub not found"
-      redirect :index
+      flash.now[:errors] = "Sub not found" #miiiiight not show up...
+      redirect_to subs_url
     end
   end
 
@@ -32,18 +32,25 @@ class SubsController < ApplicationController
     if @sub.save
       redirect_to sub_url(@sub.id)
     else
-      fail
-      flash.now[:errors] = "You must be signed in to create a sub"
+      flash.now[:errors] = @sub.errors.full_messages
       render :new
     end
   end
 
   def edit
-
+    @sub = Sub.find(params[:id])
+    render :edit
   end
 
   def update
-
+    @sub = Sub.new(sub_params)
+    @sub.moderator = current_user
+    if @sub.save
+      redirect_to sub_url(@sub.id)
+    else
+      flash.now[:errors] = "Invalid input"
+      render :edit
+    end
   end
 
   private
@@ -53,7 +60,8 @@ class SubsController < ApplicationController
   end
 
   def is_current_user_moderator?
-    current_user.id == @sub.moderator.id
+    @sub = Sub.find(params[:id])
+    current_user.id == @sub.moderator_id
   end
 
 end
